@@ -1,0 +1,22 @@
+{
+  "name": "portfolio_pro",
+  "version": "1.0.0",
+  "description": "Portfolio Shawn Connell",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o dist/css/ --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clickomat/Portfolio_pro.git"
+  },
+  "author": "Shawn Connell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clickomat/Portfolio_pro/issues"
+  },
+  "homepage": "https://github.com/clickomat/Portfolio_pro#readme",
+  "dependencies": {
+    "node-sass": "^4.9.3"
+  }
+}
