@@ -1,4 +1,7 @@
-// menu buttons
+@mixin easeOut {
+  transition: all 0.5s ease-out;
+}
+// menu buttons upper right side
 .menu-btn {
   position: absolute;
   z-index: 3;
@@ -26,13 +29,116 @@
 
       //line2 hide
       &:nth-child(2) {
-        color: red;
+        //just spins for now
       }
-      //line3
+      //line3 rotate
 
       &:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
       }
+      // line 4 rotate
+      &:nth-child(4) {
+        transform: rotate(-90deg) translate(17.5px);
+      }
     }
+  }
+}
+
+//menu overlay
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.9;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  &-branding,
+  &-nav {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  &-nav {
+    margin: 0;
+    padding: 0;
+    background-color: darken($primary-color, 5);
+    opacity: 0.9;
+    list-style: none;
+    //this is the link to explain translate3d; https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate3d
+    transform: translate3d(0, -100%, 0);
+    @include easeOut;
+
+    &.show {
+      //   slides in from top
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  //branding side
+  &-branding {
+    background: $primary-color;
+    transform: translate3d(0, 100%, 0);
+    @include easeOut;
+
+    &.show {
+      //   slides in from bottom
+      transform: translate3d(0, 0, 0);
+    }
+
+    .portriat {
+      width: 250px;
+      height: 250px;
+      background-image: url("../img/portriat.jpg");
+      border-radius: 50%;
+      background-position: 35% 1%;
+      background-repeat: no-repeat;
+      border: solid 3px $secondary-color;
+    }
+  }
+
+  .nav-item {
+    transform: translate3d(850px, 0, 0);
+    @include easeOut();
+
+    &.show {
+      //slides the nav items in from right
+      transform: translate3d(0, 0, 0);
+    }
+
+    &.current > a {
+      color: $secondary-color;
+    }
+  }
+
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    font-size: 30px;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    @include easeOut();
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+// delay each nav item slide by 0.2 seconds wit a sass for loop. link; https://sass-lang.com/documentation/file.SASS_REFERENCE.html#for
+@for $x from 1 through 4 {
+  .nav-item:nth-child(#{$x}) {
+    transition-delay: $x * 0.1s;
   }
 }
